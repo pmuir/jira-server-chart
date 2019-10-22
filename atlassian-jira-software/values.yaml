@@ -1,0 +1,44 @@
+# https://github.com/cptactionhank/docker-atlassian-jira-software
+
+image:
+  repository: cptactionhank/atlassian-jira-software
+  tag: latest 
+  pullPolicy: IfNotPresent
+
+jira:
+  reverseProxyHost: jira.aps-throatgoassamer.jxaas.dev
+  reverseProxyPort: 443
+  reverseProxyScheme: https
+  javaHeapSize: 1024m
+  javaMemoryOptions: "-XX:MaxMetaspaceSize=512m -XX:MaxDirectMemorySize=10m"
+  javaOptions: ""
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - jira.aps-throatgossamer.jxaas.dev
+  #tls: 
+  #  - secretName: tls-aps-throatgossamer-jxaas-dev-p 
+  #    hosts:
+  #      - jira.aps-throatgoassamer.jxaas.dev
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+  # existingClaim: existing-pvc
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
